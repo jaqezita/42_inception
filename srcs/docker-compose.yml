@@ -1,0 +1,40 @@
+
+version: '3'
+
+services:
+
+  nginx:
+    image:nginx: 42project
+    container_name: nginx
+    env_file:
+      - .env
+    environment:
+      - SERVER_NAME
+    ports:
+      - "443:443"
+    build: 
+      args:
+        - SERVER_NAME=${SERVER_NAME}
+      context: requirements/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - 
+
+volumes:
+  mariadb_data:
+    name: mariadb
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jaqribei/data/mariadb
+  wordpress_data:
+    name: wordpress
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jaqribei/data/wordpress
+
+networks:
+  inception:
+    name: inception
+    driver: bridge
