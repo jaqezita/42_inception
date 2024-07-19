@@ -1,6 +1,6 @@
 FROM debian:oldstable
 
-ARG WP_BD
+ARG WP_DB
 ARG WP_USER
 ARG WP_PW
 
