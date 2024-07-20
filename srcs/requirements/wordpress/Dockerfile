@@ -14,7 +14,7 @@ RUN apt update && apt install -y \
 	php-fpm \
 	php-mysql \
 	mariadb-client \
-	worpress \
+	wordpress \
 	wget \
 	&& \
 	apt clean
