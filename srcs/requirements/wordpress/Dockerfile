@@ -34,5 +34,4 @@ COPY ./tools/init-only-if-mariadb-is-up.sh  /tmp/script.sh
 
 RUN chmod 777 /tmp/script.sh
 
-ENTRYPOINT [ "bash" ]
-CMD [ "/tmp/script.sh" ]
+ENTRYPOINT [ "/tmp/script.sh" ]
