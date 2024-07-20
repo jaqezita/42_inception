@@ -1,5 +1,24 @@
-
 version: '3'
+
+volumes:
+  mdb:
+    name: v-mariadb
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/jaqribei/data/mariadb-db
+
+  wpdb:
+    name: v-wordpress
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/jaqribei/data/wordpress-db
+
+networks:
+  inception_network:
+    name: inception_network
+    driver: bridge
 
 services:
 
@@ -20,9 +39,9 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress_data:/var/www/html
+      - wpdb:/var/www/html
     networks:
-      - inception
+      - inception_network
     restart: always
 
   wordpress:
@@ -54,9 +73,9 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wordpress_data:/var/www/html
+      - wpdb:/var/www/html
     networks:
-      - inception
+      - inception_network
     restart: always
 
   mariadb:
@@ -76,26 +95,7 @@ services:
         - WP_USER=${WP_USER}
         - WP_PW=${WP_PW}
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mdb:/var/lib/mysql
     networks:
-      - inception
+      - inception_network
     restart: always
-
-volumes:
-  mariadb_data:
-    name: mariadb
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/jaqribei/data/mariadb
-  wordpress_data:
-    name: wordpress
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/jaqribei/data/wordpress
-
-networks:
-  inception:
-    name: inception_network
-    driver: bridge

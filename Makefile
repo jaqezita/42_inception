@@ -1,13 +1,13 @@
 VOLUME_PATH=/home/jaqribei/data
 COMPOSE=./srcs/docker-compose.yml
-DOT_ENV=https://gist.githubusercontent.com/jaqezita/0cd09153981867c6f8e56a7546f5b0c0/raw/32fb0478f27faed164db0e532bab3cef13527b1c/.env
+DOT_ENV=https://gist.githubusercontent.com/jaqezita/0cd09153981867c6f8e56a7546f5b0c0/raw/ecc6d65b73a79aaf69480aaad5d08f357140affb/.env
 
 all: permission config up
 .PHONY: all
 
 permission:
-	@/usr/bin/echo -e '\033[1;33mGIVE ME YOUR SUDO PERMISSION!\033[0m'
-	@sudo /usr/bin/echo -e '\033[1;31mYOU FOOL! I NOW HAVE FULL CONTROL\033[0m'
+	@/usr/bin/echo -e '\033[1;33mSUDO PERMISSION!\033[0m'
+	@sudo /usr/bin/echo -e '\033[1;31mWORKING\033[0m'
 .PHONY: permission
 
 config:
@@ -47,7 +47,7 @@ prune: down
 		docker volume rm $(shell docker volume ls -q); \
 	fi
 	@sudo rm -fr ${VOLUME_PATH}/*
-	@docker system prune -f -a # aparentemente a flag --volumes n funciona
+	@docker system prune -f -a
 .PHONY: prune
 
 re: prune all
